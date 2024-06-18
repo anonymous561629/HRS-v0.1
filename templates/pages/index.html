@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Home Page
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Showcase Area -->
+<div class="container-fluid bg-dark text-white py-4 d-flex flex-column justify-content-center align-items-center">
+    <h1>Find the perfect Rental</h1>
+    <p class="w-20">Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    <div class="container">
+       <form action="{% url 'search_property' %}" method="GET" class="d-flex justify-content-center align-items-center">
+            <input type="search" name="search_property" class="form-control me-2" style="width: 50%;" placeholder="Search by location">
+            <button type="submit" class="btn btn-light">Search</button>
+       </form>
+    </div>
+</div>
+
+<!-- Featured Properties -->
+{% if featured_properties %}
+<div class="container">
+    <h2 class="text-center my-3">Featured Properties</h2>
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
+                
+        {% for property in featured_properties %}
+
+        <div class="card m-3 position-relative">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxuwwqhbenhtr_hPOkocblyV6wKAbOvfKY8g&s"
+                class="card-img-top" alt="property-image" width="10">
+            <div class="card-body">
+                <div class="featured-label">
+                    Featured
+                </div>
+                <div class="price-label">
+                    {{ property.price }} / month
+                </div>
+                <h5 class="card-title">{{ property.property_title | title}}</h5>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="d-flex mx-1">
+                        <p><i class="fa-solid fa-bed mx-1"></i></p>
+                        <p>{{ property.bedrooms }} Beds</p>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center mx-1 my-3">
+                        <p><i class="fa-solid fa-bath mx-1"></i></p>
+                        <p>{{ property.bathrooms }} Baths</p>
+                    </div>
+
+                    <div class="d-flex mx-1">
+                        <p><i class="fa-solid fa-chart-area mx-1"></i></p>
+                        <p>{{ property.sqft }} Sqft</p>
+                    </div>
+                </div>
+                <hr class="w-100">
+
+                <div class="d-flex justify-content-between">
+                    <p><i class="fa-solid fa-location-dot"></i> {{ property.address | title }} </p>
+                    <a href="{% url 'property' property.id  %}"><button class="btn btn-dark">Details</button></a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+{% endif %}
+
+<!-- Recent Properties -->
+
+<div class="container">
+    <h2 class="text-center my-3">Recent Properties</h2>
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
+        {% for property in recent_properties %}
+        <div class="card m-3 position-relative">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxuwwqhbenhtr_hPOkocblyV6wKAbOvfKY8g&s"
+                class="card-img-top" alt="property-image" width="10">
+            <div class="card-body">
+                <div class="price-label">
+                    2000 / month
+                </div>
+                <h5 class="card-title">{{ property.property_title | title}}</h5>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="d-flex mx-1">
+                        <p><i class="fa-solid fa-bed mx-1"></i></p>
+                        <p>{{ property.bedrooms }} Beds</p>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center mx-1 my-3">
+                        <p><i class="fa-solid fa-bath mx-1"></i></p>
+                        <p>{{ property.bathrooms }} Baths</p>
+                    </div>
+
+                    <div class="d-flex mx-1">
+                        <p><i class="fa-solid fa-chart-area mx-1"></i></p>
+                        <p>{{ property.sqft }} Sqft</p>
+                    </div>
+                </div>
+                <hr class="w-100">
+
+                <div class="d-flex justify-content-between">
+                    <p><i class="fa-solid fa-location-dot"></i> {{ property.address | title }} </p>
+                    <a href="{% url 'property' property.id  %}"><button class="btn btn-dark">Details</button></a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+            <div class="my-4 d-flex justify-content-center">
+              <a href="{% url 'properties' %}"><button class="btn btn-dark">View All</button></a>
+            </div>
+</div>
+{% endblock content %}

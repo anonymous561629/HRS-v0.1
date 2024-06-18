@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Property
+{% endblock title %}
+
+
+{% block content %}
+<!-- Property Images -->
+<div class="container-fluid mx-0">
+    <img src="{{ property.main_image.url }}" alt="main-image"
+        width="100%" height="300">
+</div>
+<div class="container d-flex justify-content-evenly my-4">
+    <img src="{{ property.image_1.url }}" alt="image-1" width="30%">
+    <img src="{{ property.image_2.url }}" alt="image-2" width="30%">
+    <img src="{{ property.image_3.url }}" alt="image-3" width="30%">
+</div>
+
+<div class="container my-4">
+<!-- Property Detail -->
+        <div class="row">
+            <div class="col-6">
+<h2 class="my-4">Property Details</h2>
+            <div class="col-12 me-4 mb-3">
+                <div class="d-flex justify-content-between border-bottom">
+                    <p><i class="fa-solid fa-money-bill mx-1"></i>Price: </p>
+                    <p>{{ property.price }}</p>
+                </div>
+            </div>
+            <div class="col-12 me-4 mb-3">
+                <div class="d-flex justify-content-between border-bottom">
+                    <p><i class="fa-solid fa-person-booth mx-1"></i>Rooms: </p>
+                    <p>{{ property.rooms }}</p>
+                </div>
+            </div>
+    
+            <div class="col-12 me-4 mb-3">
+                <div class="d-flex justify-content-between border-bottom">
+                    <p><i class="fa-solid fa-bed mx-1"></i>Bedrooms: </p>
+                    <p>{{ property.bedrooms }}</p>
+                </div>
+            </div>
+            <div class="col-12 me-4 mb-3">
+                <div class="d-flex justify-content-between border-bottom">
+                    <p><i class="fa-solid fa-bath mx-1"></i>Bathrooms: </p>
+                    <p>{{ property.bathrooms }}</p>
+                </div>
+            </div>
+
+            <div class="col-12 me-4 mb-3">
+                <div class="d-flex justify-content-between border-bottom">
+                    <p><i class="fa-solid fa-warehouse mx-1"></i>Garage: </p>
+                    <p>{{ property.garage }}</p>
+                </div>
+            </div>
+
+            <div class="col-12 me-4 mb-3">
+                <div class="d-flex justify-content-between border-bottom">
+                    <p><i class="fa-solid fa-chart-area mx-1"></i>Sqaure Feet: </p>
+                    <p>{{ property.sqft }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+            <h2 class="my-4">Contact Property Owner</h2>
+            {% if user.is_authenticated %}
+            <form action="{% url 'property' property.id %}" method="POST" class="w-75">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" value="{{ user.username }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" value="{{ user.email }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="contact_no" class="form-label">Contact No</label>
+                    <input type="number" name="contact_no" class="form-control" id="phone" value="{{ user.contact_no }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea name="message" class="form-control" id="message" rows="3"
+                        placeholder="Type your message here"></textarea>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" value="Send Message" class="bg-dark text-white text-center w-100 py-2">
+                </div>
+            </form>
+    {% else %}
+            <p class="bg-dark text-white py-2 px-4">You are not logged in</p>
+    {% endif %}
+
+        </div>
+    </div>
+        
+<!-- Property Amenities -->
+<div class="container my-4">
+    <h2 class="my-4">Property Amenities</h2>
+    <div class="row">
+        <div class="col-6 me-4">
+          <div class="row">
+              <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.wifi %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Wifi</p>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.kitchen %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Kitchen</p>
+                </div>
+            </div>
+            
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.parking %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Parking</p>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.swimming_pool %} fa-check text-success text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Swimming Pool</p>
+                </div>
+            </div>
+    
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.air_conditioning %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Air Conditioning</p>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.balcony %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Balcony</p>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.tv %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>TV</p>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.laundry %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Laundry</p>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="d-flex mx-1">
+                    <p><i class="fa-solid {% if property.elevator_access %} fa-check text-success {% else %} fa-xmark text-danger {% endif %} mx-1"></i></p>
+                    <p>Elevator Access</p>
+                </div>
+            </div>
+         </div>      
+    </div>
+    </div>
+
+<!-- Property Location -->
+<div class="container">
+    
+</div>
+{% endblock content %}

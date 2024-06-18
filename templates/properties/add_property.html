@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Property
+{% endblock title %}
+
+
+{% block content %}
+<div class="container my-4">
+   <h2 class="my-4">Add a Property</h2>
+   <form action="{% url 'add_property' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+         {{ form.as_p }}
+    <input type="submit" class="bg-dark text-white text-center py-2 w-100 my-3" value="Add Property">
+   </form>
+</div>
+
+{% endblock content %}

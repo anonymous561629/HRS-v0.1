@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-4">
+    <h2 class="my-3">User Registration</h2>
+    <form action="{% url 'user_registration' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" name="email-address" class="form-control" id="email"
+                placeholder="Enter your email address">
+        </div>
+        <div class="mb-3">
+            <label for="contact-no" class="form-label">Contact No</label>
+            <input type="number" name="contact-no" class="form-control" id="contact-no"
+                placeholder="Enter contact number">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea name="address" class="form-control" id="address" rows="3"
+                placeholder="Enter your address"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
+        </div>
+        <div class="mb-3">
+            <label for="cpassword" class="form-label">Confirm Password</label>
+            <input type="password" name="cpassword" class="form-control" id="cpassword"
+                placeholder="Enter the same password again">
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Register" class="bg-dark text-white text-center w-100 py-2">
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

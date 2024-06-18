@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Recieved Enquiries
+{% endblock title %}
+    
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="my-4">Recieved Enquiries</h2>
+    
+    {% if enquiries %}
+      <table class="table my-4">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email Address</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for enquiry in enquiries %}
+          <tr>
+            <th scope="row">{{ enquiry.id }}</th>
+            <td>{{ enquiry.user_id.username }}</td>
+            <td>{{ enquiry.user_id.email }}</td>
+            <td>{{ enquiry.user_id.contact_no }}</td>
+            <td><a href="{% url 'enquiry_details' enquiry.id %}"><button type="button" class="btn btn-light">View Detail</button></a></td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+    {% else %}
+      <p class="bg-dark text-white py-2 px-4 text-center">No enquiries recieved up untill now</p>
+
+    {% endif %}
+      
+   
+</div>
+{% endblock content %}

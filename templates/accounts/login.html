@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Login
+{% endblock title %}
+    
+
+{% block content %}
+
+<div class="container my-4">
+    <h2 class="my-4">Login</h2>
+    <form action="{% url 'login_user' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Login" class="bg-dark text-white text-center w-100 py-2">
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

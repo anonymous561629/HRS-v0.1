@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Update Property
+{% endblock title %}
+    
+
+{% block content %}
+
+<div class="container my-4">
+    <h2 class="my-4">Update your Property</h2>
+    <form action="{% url 'update_property' updated_property.id %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column">
+        {% csrf_token %}
+     <label for="id_property_title">Property title:</label>
+     <input type="text" name="property_title" value="{{ updated_property.property_title }}" class="form-control" maxlength="200" required="" id="id_property_title">
+
+     <label for="id_bathrooms">Bathrooms:</label>
+     <input type="number" name="bathrooms" value="{{ updated_property.bathrooms }}" class="form-control" required="" id="id_bathrooms">
+     
+     <label for="id_bedrooms">Bedrooms:</label>
+     <input type="number" name="bedrooms" value="{{ updated_property.bedrooms }}" class="form-control" required="" id="id_bedrooms">
+     
+     <label for="id_rooms">Rooms:</label>
+     <input type="number" name="rooms" value="{{ updated_property.rooms }}" class="form-control" required="" id="id_rooms">
+     <label for="id_price">Price:</label>
+     <input type="number" name="price" value="{{ updated_property.price }}" class="form-control" required="" id="id_price">
+     
+     <label for="id_garage">Garage:</label>
+     <input type="number" name="garage" value="{{ updated_property.garage }}" value="0" class="form-control" required="" id="id_garage">
+     
+     <label for="id_address">Address:</label>
+     <input type="text" name="address" value="{{ updated_property.address }}" class="form-control" maxlength="200" required="" id="id_address">
+     
+     <label for="id_city">City:</label>
+     <input type="text" name="city" value="{{ updated_property.city }}" class="form-control" maxlength="100" required="" id="id_city">
+    
+     <label for="id_state">State:</label>
+     <input type="text" name="state" value="{{ updated_property.state }}" class="form-control" maxlength="100" required="" id="id_state">
+         
+     <label for="id_zipcode">Zipcode:</label>
+     <input type="text" name="zipcode" value="{{ updated_property.zipcode }}" class="form-control" maxlength="20" required="" id="id_zipcode">
+     <label for="id_sqft">Sqft:</label>
+     <input type="number" name="sqft" value="{{ updated_property.sqft }}" class="form-control" step="0.1" required="" id="id_sqft">
+    
+     <label for="id_main_image">Main image:</label>
+     <input type="file" name="main_image" value="{{ updated_property.main_image.url }" class="form-control" required="" id="id_main_image">
+
+     <label for="id_image_1">Image 1:</label>
+     <input type="file" name="image_1" value="{{ updated_property.image_1.url }}" class="form-control" required="" id="id_image_1">
+
+     <label for="id_image_2">Image 2:</label>
+     <input type="file" name="image_2" value="{{ updated_property.image_2.url }}" class="form-control" required="" id="id_image_2">
+     
+     <label for="id_image_3">Image 3:</label>
+     <input type="file" name="image_3" value="{{ updated_property.image_3.url }}" class="form-control" required="" id="id_image_3">
+     
+     <label for="id_wifi">Wifi:</label>
+     <input type="checkbox" name="wifi" {% if updated_property.wifi %} checked {% endif %} id="id_wifi">
+     
+     <label for="id_kitchen">Kitchen:</label>
+     <input type="checkbox" name="kitchen" {% if updated_property.kitchen %} checked {% endif %} id="id_kitchen">
+     
+     <label for="id_parking">Parking:</label>
+     <input type="checkbox" name="parking" {% if updated_property.parking %} checked {% endif %} id="id_parking">
+     
+     <label for="id_swimming_pool">Swimming pool:</label>
+     <input type="checkbox" name="swimming_pool" {% if updated_property.swimming_pool %} checked {% endif %} id="id_swimming_pool">
+     
+     <label for="id_air_conditioning">Air conditioning:</label>
+     <input type="checkbox" name="air_conditioning" {% if updated_property.air_conditioning %} checked {% endif %} id="id_air_conditioning">
+     
+     <label for="id_balcony">Balcony:</label>
+     <input type="checkbox" name="balcony" {% if updated_property.balcony %} checked {% endif %} id="id_balcony">
+
+     <label for="id_tv">Tv:</label>
+     <input type="checkbox" name="tv" {% if updated_property.tv %} checked {% endif %} id="id_tv">  
+  
+     <label for="id_laundry">Laundry:</label>
+     <input type="checkbox" name="laundry" {% if updated_property.laundry %} checked {% endif %} id="id_laundry">
+   
+     <label for="id_elevator_access">Elevator access:</label>
+     <input type="checkbox" name="elevator_access" {% if updated_property.elavator_access %} checked {% endif %} id="id_elevator_access">
+
+     <input type="submit" class="bg-dark text-white text-center py-2 w-100 my-3" value="Update Property">
+    </form>
+ </div>
+
+{% endblock content %}

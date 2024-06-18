@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Manage Profile
+{% endblock title %}
+    
+
+{% block content %}
+
+<div class="container my-4">
+   <h2 class="my-4">Manage your profile</h2>
+   <form action="{% url 'manage_profile' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" id="username" 
+        value="{{ user.username }}">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" name="email-address" class="form-control" id="email"
+        value="{{ user.email }}">
+    </div>
+    <div class="mb-3">
+        <label for="contact-no" class="form-label">Contact No</label>
+        <input type="number" name="contact-no" class="form-control" id="contact-no"
+        value="{{ user.contact_no }}">
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <textarea name="address" class="form-control" id="address" rows="3">{{ user.address }}</textarea>
+    </div>
+    <!-- <div class="mb-3">
+        <label for="password" class="form-label">Old Password</label>
+        <input type="password" name="password" class="form-control" id="password"
+        placeholder="Enter your old password">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">New Password</label>
+        <input type="password" name="password" class="form-control" id="password"
+        placeholder="Enter your new password">
+    </div> -->
+    <div class="mb-3">
+        <input type="submit" value="Register" class="bg-dark text-white text-center w-100 py-2 my-4">
+    </div>
+</form>
+</div>
+
+{% endblock content %}

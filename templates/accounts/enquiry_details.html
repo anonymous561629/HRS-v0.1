@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Enquiry Detail
+{% endblock title %}
+    
+
+{% block content %}
+
+<div class="container my-4">
+   <h2>Enquiry Details</h2>
+   <table class="table my-4">
+    <tbody>
+      <tr>
+        <td><strong>Name</strong></td>
+        <td>{{ enquiry.user_id.username }}</td>
+      </tr>
+      <tr>
+        <td><strong>Property Title</strong></td>
+        <td>{{ enquiry.property_id.property_title }}</td>
+      </tr>
+      <tr>
+        <td><strong>Email Address</strong></td>
+        <td>{{ enquiry.user_id.email }}</td>
+      </tr>
+      <tr>
+        <td><strong>Contact No</strong></td>
+        <td>{{ enquiry.user_id.contact_no }}</td>
+      </tr>
+      <tr>
+        <td><strong>Address</strong></td>
+        <td>{{ enquiry.user_id.address }}</td>
+      </tr>
+      <tr>
+        <td><strong>Message</strong></td>
+        <td>{{ enquiry.message }}</td>
+      </tr>
+      <tr>
+        <td><strong>Enquiry Date</strong></td>
+        <td>{{ enquiry.enquiry_date }}</td>
+      </tr>
+      <tr>
+        <td><strong>View Property</strong></td>
+        <td><a href="{% url 'property' enquiry.property_id.id  %}"><button type="button" class="btn btn-light">View Property</button></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

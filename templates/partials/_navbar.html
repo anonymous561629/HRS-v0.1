@@ -1,0 +1,96 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                <button class="btn btn-lg btn-dark mb-4 w-100">
+                    <a href="{% url 'owner_registration' %}" style="text-decoration: none; color: white">Register as
+                        Owner</a>
+                </button>
+                <button class="btn btn-lg btn-dark w-100">
+                    <a href="{% url 'user_registration' %}" style="text-decoration: none; color: white">Register as
+                        User</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">KarayaKorona</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex-lg">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}"><i class="fa-solid fa-home mx-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'properties' %}"><i class="fa-solid fa-house mx-1"></i> Properties</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-user mx-1"></i> {{ user.username | title}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Admin -->
+
+                            {% if user.is_authenticated and user.is_staff %}
+                            <li>
+                                <a class="dropdown-item" href="{% url 'admin:index'  %}">Admin Dashboard</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a>
+                            </li>
+
+                            <!-- Owner -->
+                            {% elif user.is_authenticated and user.is_owner %}
+
+                            <li><a class="dropdown-item" href="{% url 'add_property' %}">Add Property</a></li>
+                            <li><a class="dropdown-item" href="{% url 'manage_profile' %}">Manage Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'recieved_enquiries' %}">Recieved Enquiries</a></li>
+                            <li><a class="dropdown-item" href="{% url 'manage_properties' %}">Manage Properties</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a>
+                            </li>
+
+                            <!-- User -->
+                            {% elif user.is_authenticated and user.is_user %}
+                            <li><a class="dropdown-item" href="{% url 'manage_profile' %}">Manage Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'send_enquiries' %}">Send Enquiries</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-user-plus mx-1"></i> Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login_user' %}"><i class="fa-solid fa-right-to-bracket mx-1"></i> Login</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
